@@ -223,22 +223,33 @@
 
     <div class="input-section">
         <h2>Employee Information</h2>
+        
+        <div style="background: #e8f5e8; border: 1px solid #c3e6c3; border-radius: 8px; padding: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+            </svg>
+            <div style="color: #155724; font-size: 14px;">
+                <strong>🔒 Privacy Protected:</strong> All calculations are processed locally on your device. No personal information is stored or transmitted to any server.
+            </div>
+        </div>
+        
         <div class="input-group">
             <div class="field">
                 <label for="yearsService">Years of Service at Intel:</label>
-                <input type="number" id="yearsService" min="0" max="50" step="0.1" placeholder="1.5">
+                <input type="number" id="yearsService" min="0" max="50" step="0.1" placeholder="Enter years of service">
             </div>
             <div class="field">
                 <label for="baseSalary">Annual Base Salary ($):</label>
-                <input type="number" id="baseSalary" min="0" step="1000" placeholder="241500">
+                <input type="number" id="baseSalary" min="0" step="1000" placeholder="Enter your base salary">
             </div>
             <div class="field">
                 <label for="apbAmount">Annual Performance Bonus (APB) ($):</label>
-                <input type="number" id="apbAmount" min="0" step="100" placeholder="48300">
+                <input type="number" id="apbAmount" min="0" step="100" placeholder="Enter your APB amount">
             </div>
             <div class="field">
                 <label for="age">Age:</label>
-                <input type="number" id="age" min="18" max="80" placeholder="52">
+                <input type="number" id="age" min="18" max="80" placeholder="Enter your age">
             </div>
         </div>
         <button class="calculate-btn" onclick="calculateSeparation()">Calculate My Separation Package</button>
@@ -304,7 +315,7 @@
             <ul>
                 <li><strong>Sign SARA:</strong> Within 45 days of receipt (required for separation pay and APB)</li>
                 <li><strong>COBRA Enrollment:</strong> Within 60 days after coverage ends (required for Intel-paid premiums)</li>
-                <li><strong>LHH Registration:</strong> Within 90 days of separation (services forfeited if not initiated)</li>
+                <li><strong>LHH Registration:</strong> Within 90 days of separation (services forfeited if not initiated) - Register at <a href="https://register.lhh.com/" target="_blank" style="color: #0071c5; text-decoration: none;">https://register.lhh.com/</a></li>
                 <li><strong>Equipment Return:</strong> By termination date</li>
             </ul>
         </div>
@@ -315,6 +326,7 @@
                 <li><strong>AskHR:</strong> 1-800-238-0486</li>
                 <li><strong>Workforce Transition Services:</strong> workforce.transition.services.gam@intel.com</li>
                 <li><strong>LHH Career Services:</strong> 1-888-224-4120 or careerservices@lhh.com</li>
+                <li><strong>LHH Registration Website:</strong> <a href="https://register.lhh.com/" target="_blank" style="color: #0071c5; text-decoration: none;">https://register.lhh.com/</a></li>
             </ul>
         </div>
     </div>

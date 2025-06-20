@@ -7,11 +7,141 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
+            margin: 0;
             padding: 20px;
             background-color: #f5f7fa;
             color: #333;
+        }
+        
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .calculator-section {
+            min-width: 0;
+        }
+        
+        .checklist-sidebar {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .checklist-header {
+            background: linear-gradient(135deg, #0071c5, #004494);
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+        
+        .checklist-header h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        
+        .checklist-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .control-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .checklist-content {
+            padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .checklist-content h1 {
+            font-size: 16px;
+            margin: 0 0 15px 0;
+            color: #0071c5;
+        }
+        
+        .checklist-content h2 {
+            font-size: 14px;
+            margin: 15px 0 8px 0;
+            color: #333;
+        }
+        
+        .checklist-content h3 {
+            font-size: 13px;
+            margin: 10px 0 5px 0;
+            color: #555;
+        }
+        
+        .checklist-content h4 {
+            font-size: 12px;
+            margin: 8px 0 5px 0;
+            color: #666;
+        }
+        
+        .checklist-content ul {
+            margin: 5px 0;
+            padding-left: 15px;
+        }
+        
+        .checklist-content li {
+            margin: 3px 0;
+        }
+        
+        .checklist-content hr {
+            margin: 10px 0;
+            border: none;
+            border-top: 1px solid #e1e8ed;
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .checklist-sidebar, .checklist-sidebar * {
+                visibility: visible;
+            }
+            .checklist-sidebar {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+            }
+            .checklist-header {
+                background: #0071c5 !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .checklist-controls {
+                display: none;
+            }
+            .checklist-content {
+                max-height: none;
+                overflow: visible;
+            }
         }
         
         .header {
@@ -206,133 +336,168 @@
                 padding: 10px;
             }
             
+            .main-container {
+                gap: 15px;
+            }
+            
             .header h1 {
-                font-size: 1.8em;
+                font-size: 1.4em;
             }
             
             .input-group {
                 grid-template-columns: 1fr;
             }
+            
+            .checklist-content {
+                font-size: 11px;
+                max-height: 60vh;
+            }
+            
+            .checklist-header h3 {
+                font-size: 1.1em;
+            }
+            
+            .control-btn {
+                font-size: 11px;
+                padding: 6px 8px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Intel Separation Package Calculator</h1>
-        <div class="subtitle">Calculate your CPM (Corporate People Movement) separation benefits</div>
-    </div>
+    <div class="main-container">
+        <div class="calculator-section">
+            <div class="header">
+                <h1>Intel Separation Package Calculator</h1>
+                <div class="subtitle">Calculate your CPM (Corporate People Movement) separation benefits</div>
+            </div>
 
-    <div class="input-section">
-        <h2>Employee Information</h2>
-        
-        <div style="background: #e8f5e8; border: 1px solid #c3e6c3; border-radius: 8px; padding: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="M9 12l2 2 4-4"></path>
-            </svg>
-            <div style="color: #155724; font-size: 14px;">
-                <strong>🔒 Privacy Protected:</strong> All calculations are processed locally on your device. No personal information is stored or transmitted to any server.
+            <div class="input-section">
+                <h2>Employee Information</h2>
+                
+                <div style="background: #e8f5e8; border: 1px solid #c3e6c3; border-radius: 8px; padding: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                    <div style="color: #155724; font-size: 14px;">
+                        <strong>🔒 Privacy Protected:</strong> All calculations are processed locally on your device. No personal information is stored or transmitted to any server.
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <div class="field">
+                        <label for="yearsService">Years of Service at Intel:</label>
+                        <input type="number" id="yearsService" min="0" max="50" step="0.1" placeholder="Enter years of service">
+                    </div>
+                    <div class="field">
+                        <label for="baseSalary">Annual Base Salary ($):</label>
+                        <input type="number" id="baseSalary" min="0" step="1000" placeholder="Enter your base salary">
+                    </div>
+                    <div class="field">
+                        <label for="apbAmount">Annual Perf Bonus (APB) ($):</label>
+                        <input type="number" id="apbAmount" min="0" step="100" placeholder="Enter your APB amount">
+                    </div>
+                    <div class="field">
+                        <label for="ageGroup">Age Group (for healthcare benefit):</label>
+                        <select id="ageGroup">
+                            <option value="">Select your age group...</option>
+                            <option value="under64">Age 63 and below (12 months Intel-paid COBRA)</option>
+                            <option value="64plus">Age 64 and above (Healthcare cash payout)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="calculate-btn" onclick="calculateSeparation()">Calculate My Separation Package</button>
+            </div>
+
+            <div class="results" id="results">
+                <h2>Your Separation Package Results</h2>
+                
+                <div class="total-highlight">
+                    <div>Total Cash Benefits: <span id="totalCash">$0</span></div>
+                </div>
+
+                <table class="benefit-table">
+                    <thead>
+                        <tr>
+                            <th>Benefit Type</th>
+                            <th>Amount</th>
+                            <th>SARA Required?</th>
+                            <th>Payment Timeline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Separation Pay</strong></td>
+                            <td id="separationPay">$0</td>
+                            <td><span class="sara-required">Yes</span></td>
+                            <td>Within 2 payroll cycles</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pay in lieu of Redeployment</strong></td>
+                            <td id="redeploymentPay">$0</td>
+                            <td><span class="sara-not-required">No</span></td>
+                            <td>During transition period</td>
+                        </tr>
+                        <tr>
+                            <td><strong>APB Payment (Prorated)</strong></td>
+                            <td id="apbPay">$0</td>
+                            <td><span class="sara-required">Yes</span></td>
+                            <td>By March 15, 2026</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Healthcare Benefit</strong></td>
+                            <td id="healthcareBenefit">12 months COBRA</td>
+                            <td><span class="sara-not-required">No</span></td>
+                            <td>Must enroll within 60 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Career Transition Services</strong></td>
+                            <td>6 months with LHH</td>
+                            <td><span class="sara-not-required">No</span></td>
+                            <td>Available immediately</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box">
+                    <h4>Important: SARA (Separation and Release Agreement)</h4>
+                    <p><strong id="saraAmount">$0</strong> of your benefits require signing the SARA within 45 days of receipt. Without signing SARA, you only receive <strong id="nonSaraAmount">$0</strong>.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Key Action Items & Deadlines</h4>
+                    <ul>
+                        <li><strong>Sign SARA:</strong> Within 45 days of receipt (required for separation pay and APB)</li>
+                        <li><strong>COBRA Enrollment:</strong> Within 60 days after coverage ends (required for Intel-paid premiums)</li>
+                        <li><strong>LHH Registration:</strong> Within 90 days of separation (services forfeited if not initiated) - Register at <a href="https://register.lhh.com/" target="_blank" style="color: #0071c5; text-decoration: none;">https://register.lhh.com/</a></li>
+                        <li><strong>Equipment Return:</strong> By termination date</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>Contact Information</h4>
+                    <ul>
+                        <li><strong>AskHR:</strong> 1-800-238-0486</li>
+                        <li><strong>Workforce Transition Services:</strong> workforce.transition.services.gam@intel.com</li>
+                        <li><strong>LHH Career Services:</strong> 1-888-224-4120 or careerservices@lhh.com</li>
+                        <li><strong>LHH Registration Website:</strong> <a href="https://register.lhh.com/" target="_blank" style="color: #0071c5; text-decoration: none;">https://register.lhh.com/</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         
-        <div class="input-group">
-            <div class="field">
-                <label for="yearsService">Years of Service at Intel:</label>
-                <input type="number" id="yearsService" min="0" max="50" step="0.1" placeholder="Enter years of service">
+        <div class="checklist-sidebar">
+            <div class="checklist-header">
+                <h3>Exit Checklist</h3>
+                <div class="checklist-controls">
+                    <button class="control-btn" onclick="printChecklist()">🖨️ Print</button>
+                    <button class="control-btn" onclick="downloadPDF()">📄 Download PDF</button>
+                </div>
             </div>
-            <div class="field">
-                <label for="baseSalary">Annual Base Salary ($):</label>
-                <input type="number" id="baseSalary" min="0" step="1000" placeholder="Enter your base salary">
+            <div class="checklist-content" id="checklistContent">
+                <!-- Content will be loaded by JavaScript -->
             </div>
-            <div class="field">
-                <label for="apbAmount">Annual Perf Bonus (APB) ($):</label>
-                <input type="number" id="apbAmount" min="0" step="100" placeholder="Enter your APB amount">
-            </div>
-            <div class="field">
-                <label for="ageGroup">Age Group (for healthcare benefit):</label>
-                <select id="ageGroup">
-                    <option value="">Select your age group...</option>
-                    <option value="under64">Age 63 and below (12 months Intel-paid COBRA)</option>
-                    <option value="64plus">Age 64 and above (Healthcare cash payout)</option>
-                </select>
-            </div>
-        </div>
-        <button class="calculate-btn" onclick="calculateSeparation()">Calculate My Separation Package</button>
-    </div>
-
-    <div class="results" id="results">
-        <h2>Your Separation Package Results</h2>
-        
-        <div class="total-highlight">
-            <div>Total Cash Benefits: <span id="totalCash">$0</span></div>
-        </div>
-
-        <table class="benefit-table">
-            <thead>
-                <tr>
-                    <th>Benefit Type</th>
-                    <th>Amount</th>
-                    <th>SARA Required?</th>
-                    <th>Payment Timeline</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Separation Pay</strong></td>
-                    <td id="separationPay">$0</td>
-                    <td><span class="sara-required">Yes</span></td>
-                    <td>Within 2 payroll cycles</td>
-                </tr>
-                <tr>
-                    <td><strong>Pay in lieu of Redeployment</strong></td>
-                    <td id="redeploymentPay">$0</td>
-                    <td><span class="sara-not-required">No</span></td>
-                    <td>During transition period</td>
-                </tr>
-                <tr>
-                    <td><strong>APB Payment (Prorated)</strong></td>
-                    <td id="apbPay">$0</td>
-                    <td><span class="sara-required">Yes</span></td>
-                    <td>By March 15, 2026</td>
-                </tr>
-                <tr>
-                    <td><strong>Healthcare Benefit</strong></td>
-                    <td id="healthcareBenefit">12 months COBRA</td>
-                    <td><span class="sara-not-required">No</span></td>
-                    <td>Must enroll within 60 days</td>
-                </tr>
-                <tr>
-                    <td><strong>Career Transition Services</strong></td>
-                    <td>6 months with LHH</td>
-                    <td><span class="sara-not-required">No</span></td>
-                    <td>Available immediately</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="warning-box">
-            <h4>Important: SARA (Separation and Release Agreement)</h4>
-            <p><strong id="saraAmount">$0</strong> of your benefits require signing the SARA within 45 days of receipt. Without signing SARA, you only receive <strong id="nonSaraAmount">$0</strong>.</p>
-        </div>
-
-        <div class="info-box">
-            <h4>Key Action Items & Deadlines</h4>
-            <ul>
-                <li><strong>Sign SARA:</strong> Within 45 days of receipt (required for separation pay and APB)</li>
-                <li><strong>COBRA Enrollment:</strong> Within 60 days after coverage ends (required for Intel-paid premiums)</li>
-                <li><strong>LHH Registration:</strong> Within 90 days of separation (services forfeited if not initiated) - Register at <a href="https://register.lhh.com/" target="_blank" style="color: #0071c5; text-decoration: none;">https://register.lhh.com/</a></li>
-                <li><strong>Equipment Return:</strong> By termination date</li>
-            </ul>
-        </div>
-
-        <div class="info-box">
-            <h4>Contact Information</h4>
-            <ul>
-                <li><strong>AskHR:</strong> 1-800-238-0486</li>
-                <li><strong>Workforce Transition Services:</strong> workforce.transition.services.gam@intel.com</li>
-                <li><strong>LHH Career Services:</strong> 1-888-224-4120 or careerservices@lhh.com</li>
-                <li><strong>LHH Registration Website:</strong> <a href="https://register.lhh.com/" target="_blank" style="color: #0071c5; text-decoration: none;">https://register.lhh.com/</a></li>
-            </ul>
         </div>
     </div>
 
@@ -404,6 +569,248 @@
             if (event.key === 'Enter') {
                 calculateSeparation();
             }
+        });
+
+        function printChecklist() {
+            window.print();
+        }
+
+        function downloadPDF() {
+            // For a simple solution, we'll open print dialog with instruction
+            // In a real implementation, you might use a library like jsPDF
+            alert('Use your browser\'s print function and select "Save as PDF" as the destination to download the checklist as a PDF.');
+            window.print();
+        }
+
+        // Load checklist content on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const checklistContent = document.getElementById('checklistContent');
+            
+            const checklistHTML = `
+                <h1>Intel CPM Separation - Complete Exit Checklist</h1>
+                <p><strong>Termination Date:</strong> _______________<br>
+                <strong>Transition Period:</strong> _______________</p>
+                <hr>
+                
+                <h2>🔴 IMMEDIATE ACTIONS (Within 48 Hours)</h2>
+                
+                <h3>Benefits & Financial</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Read complete separation package</strong> - U.S. CPM Separation Program Package</li>
+                    <li><input type="checkbox"> <strong>Access CPM Tool</strong> to:
+                        <ul>
+                            <li><input type="checkbox"> View separation package details and FAQs</li>
+                            <li><input type="checkbox"> View estimate of separation payout</li>
+                            <li><input type="checkbox"> Enter vacation days owed (if applicable for your state)</li>
+                            <li><input type="checkbox"> Enter relocation decision (if applicable)</li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox"> <strong>Calculate your benefits</strong> using separation calculator</li>
+                    <li><input type="checkbox"> <strong>Contact AskHR</strong> for questions: 📞 1-800-238-0486</li>
+                </ul>
+                
+                <h3>Personal Data & Communication</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Update personal email</strong> in My Health Benefits profile for COBRA notifications</li>
+                    <li><input type="checkbox"> <strong>Transfer personal data</strong> from Intel assets:
+                        <ul>
+                            <li><input type="checkbox"> Email personal files to your personal email account</li>
+                            <li><input type="checkbox"> Use only Intel email service for transfers</li>
+                            <li><input type="checkbox"> Do NOT use external file sharing services</li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox"> <strong>Backup important work contacts</strong> to personal device</li>
+                </ul>
+                <hr>
+                
+                <h2>🟡 WEEK 1 ACTIONS</h2>
+                
+                <h3>Work Transition</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Meet with manager</strong> to discuss:
+                        <ul>
+                            <li><input type="checkbox"> Work wrap-up and transition plan</li>
+                            <li><input type="checkbox"> Outstanding projects and handoffs</li>
+                            <li><input type="checkbox"> Knowledge transfer timeline</li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox"> <strong>Complete Insights discussion</strong> with manager</li>
+                    <li><input type="checkbox"> <strong>Grade current OKRs</strong></li>
+                    <li><input type="checkbox"> <strong>Submit outstanding expense reports</strong></li>
+                    <li><input type="checkbox"> <strong>Submit final timecards</strong> (if non-exempt)</li>
+                </ul>
+                
+                <h3>Administrative Tasks</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Change ownership</strong> for:
+                        <ul>
+                            <li><input type="checkbox"> SharePoint sites you manage</li>
+                            <li><input type="checkbox"> Shared drives</li>
+                            <li><input type="checkbox"> Contracts</li>
+                            <li><input type="checkbox"> Purchase orders</li>
+                            <li><input type="checkbox"> Other services you manage</li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox"> <strong>Update org unit manager</strong> (if you're a manager)</li>
+                    <li><input type="checkbox"> <strong>Review lab hardware</strong> in AIM and reassign using Give It</li>
+                    <li><input type="checkbox"> <strong>Check American Express balance</strong>
+                        <ul>
+                            <li><input type="checkbox"> Submit expense report for reimbursement</li>
+                            <li><input type="checkbox"> Pay any outstanding balance</li>
+                            <li><input type="checkbox"> Submit Credit Refund Request Form if credits pending</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3>Immigration (If Applicable)</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Email immigration@intel.com</strong> if on H-1B or O-1 visa for return transportation instructions</li>
+                </ul>
+                <hr>
+                
+                <h2>🟡 WEEK 2-3 ACTIONS</h2>
+                
+                <h3>Career Services Registration</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Register with LHH Career Services</strong> (available 1 week after notification)
+                        <ul>
+                            <li>📞 <strong>Phone:</strong> 1-888-224-4120</li>
+                            <li>✉️ <strong>Email:</strong> careerservices@lhh.com</li>
+                            <li>🌐 <strong>Website:</strong> <a href="https://register.lhh.com/" target="_blank">https://register.lhh.com/</a></li>
+                            <li>📱 <strong>Text:</strong> "Careers" to 315.646.5447</li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox"> <strong>Schedule initial career coaching session</strong></li>
+                </ul>
+                
+                <h3>Benefits Preparation</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Review healthcare options</strong> and prepare for COBRA enrollment</li>
+                    <li><input type="checkbox"> <strong>Access U.S. Employee Transition Resource Center</strong> for:
+                        <ul>
+                            <li><input type="checkbox"> Quick transition tips</li>
+                            <li><input type="checkbox"> Career transition resources</li>
+                            <li><input type="checkbox"> Benefits and retirement information</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3>Personal Preparation</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Update LinkedIn profile</strong> (consider waiting until after separation)</li>
+                    <li><input type="checkbox"> <strong>Prepare personal references</strong> list</li>
+                    <li><input type="checkbox"> <strong>Research unemployment benefits</strong> eligibility in your state</li>
+                </ul>
+                <hr>
+                
+                <h2>🔴 FINAL WEEK ACTIONS</h2>
+                
+                <h3>Equipment Return</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Return computing assets</strong> to IT Service Center OR</li>
+                    <li><input type="checkbox"> <strong>Ship via FedEx</strong> (if unable to return to US site):
+                        <ul>
+                            <li><strong>FedEx Account:</strong> #1393-3950-9</li>
+                            <li><strong>Ship to:</strong> Intel Corporation, ATTN: Remote Support Lab, 1900 Prairie City Rd, FM2-180, Folsom, CA 95630</li>
+                            <li><input type="checkbox"> Include power supplies and all accessories</li>
+                            <li><input type="checkbox"> Use standard shipping</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3>Final Work Tasks</h3>
+                <ul>
+                    <li><input type="checkbox"> <strong>Complete all outstanding work</strong></li>
+                    <li><input type="checkbox"> <strong>Finalize knowledge transfer</strong></li>
+                    <li><input type="checkbox"> <strong>Submit final timecard</strong> (if non-exempt)</li>
+                    <li><input type="checkbox"> <strong>Clear email folders</strong> of personal items</li>
+                    <li><input type="checkbox"> <strong>Update out-of-office messages</strong></li>
+                </ul>
+                <hr>
+                
+                <h2>🟢 POST-SEPARATION ACTIONS</h2>
+                
+                <h3>Critical Timeline Actions</h3>
+                
+                <h4><strong>Within 45 Days of SARA Receipt</strong></h4>
+                <ul>
+                    <li><input type="checkbox"> <strong>Sign Separation and Release Agreement (SARA)</strong>
+                        <ul>
+                            <li><strong>Required for:</strong> Separation Pay + APB benefits</li>
+                            <li><strong>Submit via:</strong> Workday electronically or email to Workforce Transition Services</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h4><strong>Within 60 Days of Coverage End</strong></h4>
+                <ul>
+                    <li><input type="checkbox"> <strong>Enroll in COBRA</strong> (if under age 64)
+                        <ul>
+                            <li>📞 <strong>Contact:</strong> Intel Health Benefits Center at 877-466-9236</li>
+                            <li>🌐 <strong>Website:</strong> www.intel.com/go/myben</li>
+                            <li><strong>Company Key:</strong> "Intel"</li>
+                            <li><input type="checkbox"> Complete online enrollment OR mail election forms</li>
+                            <li><input type="checkbox"> Covers medical, dental, vision plans you had as active employee</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h4><strong>Within 90 Days of Separation</strong></h4>
+                <ul>
+                    <li><input type="checkbox"> <strong>Complete LHH registration</strong> (services forfeited if not initiated)</li>
+                </ul>
+                <hr>
+                
+                <h2>📞 CRITICAL CONTACT INFORMATION</h2>
+                
+                <h3>Primary Contacts</h3>
+                <ul>
+                    <li><strong>AskHR:</strong> 1-800-238-0486</li>
+                    <li><strong>Workforce Transition Services:</strong> workforce.transition.services.gam@intel.com</li>
+                    <li><strong>Employee Services:</strong> 1-800-238-0486</li>
+                </ul>
+                
+                <h3>Benefits & Healthcare</h3>
+                <ul>
+                    <li><strong>Intel Health Benefits Center:</strong> 877-466-9236</li>
+                    <li><strong>Fidelity Service Center (401k/Retirement):</strong> 888-401-7377</li>
+                    <li><strong>E*TRADE (Stock):</strong> 800-838-0908</li>
+                </ul>
+                
+                <h3>Career Services</h3>
+                <ul>
+                    <li><strong>LHH Career Services:</strong> 1-888-224-4120</li>
+                    <li><strong>LHH Email:</strong> careerservices@lhh.com</li>
+                    <li><strong>LHH Registration:</strong> <a href="https://register.lhh.com/" target="_blank">https://register.lhh.com/</a></li>
+                </ul>
+                
+                <h3>Specialized Services</h3>
+                <ul>
+                    <li><strong>Immigration (Visa holders):</strong> immigration@intel.com</li>
+                    <li><strong>Alight (Leave/Disability):</strong> 866-532-5664</li>
+                    <li><strong>American Express Travel Card:</strong> Check balance online</li>
+                </ul>
+                <hr>
+                
+                <h2>🚨 CRITICAL REMINDERS</h2>
+                
+                <h3>Key Deadlines</h3>
+                <ul>
+                    <li><strong>SARA Signing:</strong> 45 days from receipt</li>
+                    <li><strong>COBRA Enrollment:</strong> 60 days after coverage ends</li>
+                    <li><strong>LHH Registration:</strong> 90 days from separation</li>
+                    <li><strong>Equipment Return:</strong> By termination date</li>
+                </ul>
+                
+                <h3>Tax Considerations</h3>
+                <ul>
+                    <li><strong>Separation Pay & APB:</strong> Taxed at supplemental rate</li>
+                    <li><strong>Intel-paid COBRA:</strong> Generally not taxable</li>
+                    <li><strong>Healthcare cash payout:</strong> Tax-protected (age 64+)</li>
+                </ul>
+            `;
+            
+            checklistContent.innerHTML = checklistHTML;
         });
     </script>
 </body>
